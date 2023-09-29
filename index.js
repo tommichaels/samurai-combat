@@ -26,7 +26,8 @@ class Sprite {
             height: 50,
         };
         this.color = color;
-        this.isAttacking
+        this.isAttacking;
+        this.health = 100;
     }
 
     draw() {
@@ -153,7 +154,9 @@ function animate() {
         rectangle2: enemy,
     }) && player.isAttacking) {
         player.isAttacking = false;
-        console.log("player attacking");
+        // console.log("player attacking");
+        enemy.health -= 20;
+        document.querySelector('#enemyHealth').style.width = enemy.health + '%';
     }
 
      //Detect Collision for Enemy
@@ -162,7 +165,9 @@ function animate() {
         rectangle2: player,
     }) && enemy.isAttacking) {
         enemy.isAttacking = false;
-        console.log("enemy attacking");
+        // console.log("enemy attacking");
+        player.health -= 20;
+        document.querySelector('#playerHealth').style.width = player.health + '%';
     }
 }
 
