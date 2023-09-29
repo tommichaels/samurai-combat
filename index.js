@@ -7,7 +7,7 @@ canvas.height = 576;
 
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-const gravity = 0.2;
+const gravity = 0.7;
 
 class Sprite {
     constructor({position, velocity}) {
@@ -74,8 +74,6 @@ const keys ={
     },
 }
 
-let lastKey;
-
 function animate() {
     window.requestAnimationFrame(animate)
     // console.log('Animate!!!!!');
@@ -85,19 +83,20 @@ function animate() {
     enemy.update();
 
     player.velocity.x = 0;
+    enemy.velocity.x = 0;
 
     //Player Movement
-    if (keys.a.pressed && lastKey === 'a') {
-        player.velocity.x = -1;
-    } else if (keys.d.pressed && lastKey === 'd') {
-        player.velocity.x = 1;
+    if (keys.a.pressed && player.lastKey === 'a') {
+        player.velocity.x = -5;
+    } else if (keys.d.pressed && player.lastKey === 'd') {
+        player.velocity.x = 5;
     }
 
      //Enemy Movement
      if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-        enemy.velocity.x = -1;
-    } else if (keys.ArrowRight.pressed && lastKey === 'ArrowRight') {
-        enemy.velocity.x = 1;
+        enemy.velocity.x = -5;
+    } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
+        enemy.velocity.x = 5;
     }
 }
 
@@ -109,18 +108,18 @@ window.addEventListener('keydown', (event) => {
         // Move Right
         case "d":
             keys.d.pressed = true;
-            lastKey = 'd';
+            player.lastKey = 'd';
         break;
 
         // Move Left
         case "a":
             keys.a.pressed = true;
-            lastKey = 'a';
+            player.lastKey = 'a';
         break;
 
         // Jump
         case "w":
-            player.velocity.y = -10;
+            player.velocity.y = -20;
         break;
         
         //Enemy Movements
@@ -138,7 +137,7 @@ window.addEventListener('keydown', (event) => {
 
         // Jump
         case "ArrowUp":
-            enemy.velocity.y = -10;
+            enemy.velocity.y = -20;
         break;
     }
 
