@@ -123,6 +123,40 @@ function reactangularCollision({rectangle1, rectangle2}) {
     )
 }
 
+function determineWinner({player, enemy, timerId}) {
+
+    clearTimeout(timerId);
+
+    document.querySelector('#displayText').style.display = "flex";
+    if (player.health === enemy.health) {
+        document.querySelector('#displayText').innerHTML = "Tie";
+    } else if (player.health > enemy.health) {
+        document.querySelector('#displayText').innerHTML = "Player 1 Wins!";
+    } else if (player.health < enemy.health) {
+        document.querySelector('#displayText').innerHTML = "Player 2 Wins!";
+    }
+}
+
+let timer = 60;
+let timerId
+
+function decreaseTimer() {
+    if(timer > 0) {
+        timer--;
+        timerId = setTimeout(decreaseTimer, 1000);
+        document.querySelector('#timer').innerHTML = timer;
+    }
+
+
+    // On Game Timeout
+    if (timer === 0) {
+        document.querySelector('#displayText').style.display = "flex";
+        determineWinner({player, enemy, timerId});
+    }
+}
+
+decreaseTimer();
+
 function animate() {
     window.requestAnimationFrame(animate)
     // console.log('Animate!!!!!');
@@ -159,8 +193,8 @@ function animate() {
         document.querySelector('#enemyHealth').style.width = enemy.health + '%';
     }
 
-     //Detect Collision for Enemy
-     if(reactangularCollision({
+    //Detect Collision for Enemy
+    if(reactangularCollision({
         rectangle1: enemy,
         rectangle2: player,
     }) && enemy.isAttacking) {
@@ -168,6 +202,11 @@ function animate() {
         // console.log("enemy attacking");
         player.health -= 20;
         document.querySelector('#playerHealth').style.width = player.health + '%';
+    }
+
+    // End Game based on Health
+    if(enemy.health <= 0 || player.health <= 0) {
+        determineWinner({player, enemy, timerId})
     }
 }
 
