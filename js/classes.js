@@ -7,7 +7,7 @@ class Sprite {
         offset = {
             x: 0,
             y: 0,
-        }
+        },
         
         }) {
         this.position = position;
@@ -39,17 +39,22 @@ class Sprite {
         )
     }
 
-    update() {
-        this.draw();
-        this.framesElapsed++
+    animateFrames() {
         
-            if (this.framesElapsed % this.framesHold === 0) {
+        this.framesElapsed++;
+
+        if (this.framesElapsed % this.framesHold === 0) {
             if (this.framesCurrent < this.framesMax - 1) {
                 this.framesCurrent++
             } else {
                 this.framesCurrent = 0;
             }
         }
+    }
+
+    update() {
+        this.draw();
+        this.animateFrames();
     }
 }
 
@@ -64,7 +69,8 @@ class Fighter extends Sprite {
         offset = {
             x: 0,
             y: 0,
-        }
+        },
+        sprites
     }) {
         super({
             imgSrc,
@@ -93,11 +99,21 @@ class Fighter extends Sprite {
         this.framesCurrent = 0;
         this.framesElapsed = 0;
         this.framesHold = 5;
+        this.sprites = sprites;
+
+        for (const sprite in this.sprites) {
+            sprites[sprite].image = new Image();
+            sprites[sprite].image.src = sprites[sprite].imgSrc
+        }
+
+        console.log(this.sprites);
 
     }
 
     update() {
         this.draw();
+        this.animateFrames();
+
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y;
 
