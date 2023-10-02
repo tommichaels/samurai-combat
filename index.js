@@ -149,9 +149,6 @@ const enemy = new Fighter({
     }
 })
 
-
-console.log(player);
-
 const keys ={
     a: {
         pressed: false
@@ -171,7 +168,6 @@ decreaseTimer();
 
 function animate() {
     window.requestAnimationFrame(animate)
-    // console.log('Animate!!!!!');
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -226,8 +222,6 @@ function animate() {
     }) && player.isAttacking && player.framesCurrent === 4) {
         enemy.takeHit();
         player.isAttacking = false;
-        // console.log("player attacking");
-        // document.querySelector('#enemyHealth').style.width = enemy.health + '%';
         gsap.to('#enemyHealth', {
             width: enemy.health + '%'
         })
@@ -245,8 +239,6 @@ function animate() {
     }) && enemy.isAttacking && enemy.framesCurrent === 2) {
         player.takeHit();
         enemy.isAttacking = false;
-        // console.log("enemy attacking");
-        // document.querySelector('#playerHealth').style.width = player.health + '%';
         
         gsap.to('#playerHealth', {
             width: player.health + '%'
@@ -323,8 +315,6 @@ window.addEventListener('keydown', (event) => {
             break;
         }
     }
-
-    console.log(event.key);
 });
 
 window.addEventListener('keyup', (event) => {
@@ -347,6 +337,4 @@ window.addEventListener('keyup', (event) => {
             keys.ArrowLeft.pressed = false;
         break;
     }
-
-    console.log(event.key);
 });

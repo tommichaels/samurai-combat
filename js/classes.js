@@ -114,8 +114,6 @@ class Fighter extends Sprite {
             sprites[sprite].image.src = sprites[sprite].imgSrc
         }
 
-        console.log(this.sprites);
-
     }
 
     update() {
@@ -125,13 +123,6 @@ class Fighter extends Sprite {
         //attack boxes
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
-
-        // ctx.fillRect(
-        //     this.attackBox.position.x,
-        //     this.attackBox.position.y,
-        //     this.attackBox.width,
-        //     this.attackBox.height,
-        // )
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
@@ -147,9 +138,6 @@ class Fighter extends Sprite {
     attack() {
         this.switchSprite('attack1');
         this.isAttacking = true;
-        // setTimeout(() => {
-        //     this.isAttacking = false;
-        // }, 100);
     }
 
     takeHit() {

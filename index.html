@@ -10,7 +10,16 @@
     </style>
 </head>
 
-<body>
+<body style="
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+    height: 100vh; 
+    margin: 0;
+    
+    ">
     <!-- Red container Div -->
     <div style="
         position: relative;
@@ -122,6 +131,11 @@
             Tie
         </div>
         <canvas></canvas>
+    </div>
+
+    <div style="width: 1024px;">
+       <p style="color: white;">This is a classic fighting game.</p> 
+       <p style="color: white; line-height: 2.5;">To control the player (Samurai) use the <span style="color: #818CF8;"> W, A, D and space bar</span> and to control the enemy use the <span style="color: #818CF8;"> arrow keys</span></p> 
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
